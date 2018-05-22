@@ -1,4 +1,4 @@
-package com.wdocode.document.excel;
+package com.wdocode.document.constant;
 
 public enum ContentType {
 	

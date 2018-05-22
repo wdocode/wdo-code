@@ -26,6 +26,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.wdocode.document.common.IOUtil;
 import com.wdocode.document.excel.model.ExcelColumn;
 import com.wdocode.document.excel.model.ExcelDataMapper;
 import com.wdocode.document.excel.model.ExcelReplaceHolder;
@@ -853,11 +854,7 @@ public final class EXCELDocumentBuilder {
 		} catch (IOException e) {
 			throw e;
 		}finally {
-			if(tempInputStream != null)
-				try {
-					tempInputStream.close();
-				} catch (Exception e2) {
-				}
+			IOUtil.close(tempInputStream);
 		}
 		
 	}
