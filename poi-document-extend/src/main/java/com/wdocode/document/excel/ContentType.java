@@ -352,29 +352,12 @@ public enum ContentType {
 	x_t(".x_t","application/x-x_t");
 	
 
-	private String suffix;
-	private String contentType;
+	public String suffix;
+	public String contentType;
 	
 	private ContentType(String suffix,String contentType){
 		this.suffix = suffix;
 		this.contentType = contentType;
 	}
-
-	public String getSuffix() {
-		return suffix;
-	}
-
-	public void setSuffix(String suffix) {
-		this.suffix = suffix;
-	}
-
-	public String getContentType() {
-		return contentType;
-	}
-
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
-	}
-	
 
 }
