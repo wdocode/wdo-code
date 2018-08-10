@@ -74,6 +74,7 @@
 			<version>${version.log4j2}</version>
 		</dependency>
 		<dependency> <!-- 桥接：告诉commons logging使用Log4j2 -->
+		
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-jcl</artifactId>
 			<version>${version.log4j2}</version>
