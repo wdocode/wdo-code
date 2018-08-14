@@ -21,7 +21,7 @@ iBase4J使用 [Apache License 2.0][] 协议.
 ## 加入QQ群[216310267]
 交流技术问题，下载项目文档和一键启动依赖服务工具。
 
-![QQ群](216310267 "QQ群一")
+![QQ群](https://github.com/wdocode/wdo-code/blob/master/62561cccf0ab02185e8a9637ad55baa3.jpg "QQ群一")
 
 
 
