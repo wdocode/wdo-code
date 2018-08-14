@@ -13,7 +13,7 @@ import org.dom4j.Element;
  *
  */
 public final class ExcelTemplateReplaceRow{
-//	<mapper id='exportload_limit_notice' file_name="载重平衡中心飞机临时减载">
+//	<mapper id='exportload_limit_notice' file_name="到处excel模板说明">
 //  <!-- 模板路径只适用于导出时，模板文件放置在相对与本xml文件的下级templates目录中的 -->
 //  	<template path = "flight_load_limit_notice.xls" >
 //	    	<replace_rows>
