@@ -25,15 +25,19 @@ public class TestExport {
 		List<ExcelColumn> columns = new ArrayList<ExcelColumn>();
 		ExcelColumn cl = new ExcelColumn("标题", "title");
 		columns.add(cl );
+		columns.add(new ExcelColumn("标题2", "title2"));
+		columns.add(new ExcelColumn("标题3", "title3"));
 		e.setColumns(columns );
-		sheets.add(e );
+		sheets.add(e);
 		datamapper.setSheets(sheets);
 		
 	 File file = new File(datamapper.getFileName());
 	 System.out.println(file.getAbsolutePath());
 	 if(!file.exists())
 		 file.createNewFile();
+	 
 	 FileOutputStream out = new FileOutputStream(file);
+	 
 	 EXCELDocumentBuilder builder = EXCELDocumentBuilder.build(datamapper, out);
 	 Map<String,String> rowData = new HashMap<String,String>();
 	 List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
