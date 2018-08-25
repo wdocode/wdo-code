@@ -16,6 +16,7 @@ public class ExcelDataMapper {
 	/**导出显示的文件名 */
 	public static final String attr_fileName = "file_name";
 	public static final String attr_template_fileName = "template_fileName";
+	public static final String attr_DEF_DATAFORMATE = "def_dataformate";
 	/**模板文件绝对路径 */
 	private String templateFilePath;
 	private String xmlBasePath;
@@ -32,6 +33,10 @@ public class ExcelDataMapper {
 	private List<ExcelSheet> sheets;
 	/**模板文件名 */
 	private String template_fileName;
+	/**
+	 * 日期类型默认格式
+	 */
+	private String defDataformate;
 	
 	public ExcelDataMapper() {
 	}
@@ -123,6 +128,7 @@ public class ExcelDataMapper {
 			mapper.setFileSuffix(fileName.substring(fileName.lastIndexOf(".")));
 		}
 		mapper.setTemplate_fileName(e.attributeValue(attr_template_fileName));
+		mapper.setDefDataformate(e.attributeValue(attr_DEF_DATAFORMATE));
 		@SuppressWarnings("unchecked")
 		List<Element> sheet = e.elements(ExcelSheet.sheet_mapper);
 		mapper.setSheets(ExcelSheet.readFromElement(sheet));
@@ -171,5 +177,14 @@ public class ExcelDataMapper {
 		return templateFilePath;
 	}
 
+	public String getDefDataformate() {
+		return defDataformate;
+	}
+
+	public void setDefDataformate(String defDataformate) {
+		this.defDataformate = defDataformate;
+	}
+
+	
 }
 

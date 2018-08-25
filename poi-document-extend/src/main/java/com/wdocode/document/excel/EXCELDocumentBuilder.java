@@ -606,7 +606,7 @@ public final class EXCELDocumentBuilder {
 				cell = row.createCell(i);
 			if(cellstyles[i]!=null)
 				cell.setCellStyle(cellstyles[i]);
-			Object data = fillCellData(cl_mapper,cell,rowData.get(title[i]));
+			Object data = fillCellData(cl_mapper,cell,rowData==null?"":rowData.get(title[i]));
 			// 计算是否有合并行
 			addMergeRowIndex(sheetName,ct, rowIndex,cell,title,data,i);
 		}
@@ -633,6 +633,11 @@ public final class EXCELDocumentBuilder {
 		}else if(data instanceof Date){
 			result = (Date)data;
 			cell.setCellValue((Date)result);
+			CellStyle st = cell.getCellStyle();
+			int format = st.getDataFormat();
+			if(format<=0 && StringUtils.isNotBlank(datamapper.getDefDataformate())) {
+				cell.setCellStyle(getDefaultStyle(datamapper.getDefDataformate(), null, null));
+			}
 		}else if(data instanceof Number){
 			String mappval = getMapperVal(cl_mapper, data);
 			if(cl_mapper == null || StringUtils.isBlank(mappval)){
@@ -875,11 +880,16 @@ public final class EXCELDocumentBuilder {
 		if(dataformat != null){
 			DataFormat format = workbook.createDataFormat();
 			titleStyle.setDataFormat(format.getFormat(dataformat));
+//			HorizontalAlignment hali = HorizontalAlignment.
+//					valueOf(horizontalAlign==null?"":horizontalAlign.toUpperCase());
+//			if(hali!=null)
+//				titleStyle.setAlignment(hali);
+//			VerticalAlignment align = VerticalAlignment.valueOf(verticalAlign);
+//			titleStyle.setVerticalAlignment(align);
 		}
 		titleStyle.setWrapText(true);
 		return titleStyle;
 	}
-	
 	
 	/**
 	 * 移除开始行号为row的合并的单元格

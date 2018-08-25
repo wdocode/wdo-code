@@ -3,7 +3,7 @@ package com.wdocode.document.constant;
 public enum ContentType {
 	
 	
-	ALL(".*","application/octet-stream"),
+	ALL(".dat","application/octet-stream"),
 	x001(".001","application/x-001"),
 	x301(".301","application/x-301"),
 	x323(".323","text/h323"),
@@ -358,6 +358,14 @@ public enum ContentType {
 	private ContentType(String suffix,String contentType){
 		this.suffix = suffix;
 		this.contentType = contentType;
+	}
+	
+	public static ContentType codeOfSuffix(String suffix) {
+		for(ContentType t:ContentType.values()) {
+			if(t.suffix.equalsIgnoreCase(suffix))
+				return t;
+		}
+		return ContentType.ALL;
 	}
 
 }
