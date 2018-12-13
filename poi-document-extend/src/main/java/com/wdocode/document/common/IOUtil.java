@@ -2,6 +2,7 @@ package com.wdocode.document.common;
 
 import java.io.Closeable;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -45,6 +46,47 @@ public class IOUtil {
 		}
 	}
 	
+	
+	public static long copy(InputStream inputStream, String filePath) throws IOException {
+		if(!createFile(filePath)) {
+			throw new IOException("can not create file "+filePath) ;
+		}
+		OutputStream os = null;
+		try {
+			os = new FileOutputStream(filePath);
+			return copy(inputStream, os);
+		} catch (Exception e) {
+			logger.error("",e);
+			throw new IOException(e);
+		} finally {
+			close(os);
+		}
+	}
+	
+	/**
+	 * 将流对象写入到文件 
+	 * @param inputStream
+	 * @param file
+	 * @return
+	 * @throws IOException
+	 */
+	public static long copy(InputStream inputStream, File file) throws IOException {
+		if(!createFile(file)) {
+			throw new IOException("can not create file "+file) ;
+		}
+		OutputStream os = null;
+		try {
+			os = new FileOutputStream(file);
+			return copy(inputStream, os);
+		} catch (Exception e) {
+			logger.error("",e);
+			throw new IOException(e);
+		} finally {
+			close(os);
+		}
+	}
+	
+	
 	/**
 	 * 创建空文件方法 包含创建父目录
 	 * @author <a href="mailto:zhangzixiao@189.cn">zhang zixiao</a>
@@ -56,16 +98,29 @@ public class IOUtil {
 	public static boolean  createFile(String target_file) throws IOException {
 		logger.debug("into createFile(String target_file{})",target_file);
 		File file = new File(target_file);
+		return createFile(file);
+	}
+	
+	/**
+	 * 创建空文件方法 包含创建父目录
+	 * @author <a href="mailto:zhangzixiao@189.cn">zhang zixiao</a>
+	 * @since 2016年9月14日 下午2:13:24
+	 * @param target_file
+	 * @return
+	 * @throws IOException
+	 */
+	public static boolean  createFile(File target_file) throws IOException {
+		logger.debug("into createFile(String target_file{})",target_file);
 		boolean status = true;
-		if(!file.exists()){
-			File parent = file.getParentFile();
+		if(!target_file.exists()){
+			File parent = target_file.getParentFile();
 			if(!parent.exists())
 				status = parent.mkdirs();
 		}
 		if(!status)
 			return status;
 		logger.debug("end createFile(String target_file{})",target_file);
-		return file.createNewFile();
+		return target_file.createNewFile();
 		
 	}
 	
