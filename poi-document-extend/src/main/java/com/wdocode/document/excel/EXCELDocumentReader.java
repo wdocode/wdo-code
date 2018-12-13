@@ -44,6 +44,25 @@ public class EXCELDocumentReader {
 	
 	
 	
+	/**
+	 * 读取excel文件构造器
+	 * 在读取excel是对应的mapper中必须存在ExcelSheet 对象,
+	 * ExcelSheet对象中的列没有说明时 依照excel中首行作为返回结果集map中的KEY
+	 * <pre>
+	 * <p>示例</p>
+	 * 		ExcelDataMapper excelMapper = new ExcelDataMapper();
+	 *		List<ExcelSheet> sheets = new ArrayList<ExcelSheet>();
+	 *		sheets.add(new ExcelSheet("CONFIG", "CONFIG"));
+	 *		sheets.add(new ExcelSheet("dataList", "dataList"));
+	 *		excelMapper.setSheets(sheets);
+	 *		EXCELDocumentReader reader = EXCELDocumentReader.build(excelMapper, new ExcelDataSaveHandler());
+	 *		input = new FileInputStream(filePath);
+	 *		reader.readExcelData(filePath.getName(), input);
+	 * </pre>
+	 * @param datamapper
+	 * @param insertDataHandler
+	 * @return
+	 */
 	public static EXCELDocumentReader build(ExcelDataMapper datamapper,
 			ExcelDataSaveHandler insertDataHandler){
 		return new EXCELDocumentReader(datamapper, insertDataHandler);
@@ -132,7 +151,7 @@ public class EXCELDocumentReader {
 		if(sheetTitle == null || sheetTitle.title == null)
 			return null;
 		ExcelSheet mapper = datamapper.getSheetByMapKey(sheetTitle.map_key);
-		if(mapper == null || mapper.getColumns() == null){
+		if(mapper == null){
 			return null;
 		}
 		List<ExcelColumn> cls = mapper.getColumns();
@@ -142,6 +161,11 @@ public class EXCELDocumentReader {
 			String t = sheetTitle.title[i];
 			if(t == null)
 				continue;
+			// mapper 中没有设置title时依据excel中第一列作为title
+			if(cls == null || cls.size() == 0) {
+				result.put(t, rowdata[i]);
+				continue;
+			}
 			for(ExcelColumn c:cls){
 				if(c == null)
 					continue;
@@ -257,16 +281,17 @@ public class EXCELDocumentReader {
 			throw new IOException("无效的excel文件：获取表格标题失败");
 		}
 		List<SheetTitle> result = new ArrayList<SheetTitle>();
-		for(String k :title.keySet()){
-			if(k == null)
-				continue;
-			for(ExcelSheet s:sheets){
+		for(ExcelSheet s:sheets){
+			for(String k :title.keySet()){
+				if(k == null || s == null)
+					continue;
 				if(k.equals(s.getMapKey()) || k.equals(s.getSheetName())){
 					result.add(new SheetTitle(k, s.getMapKey(), title.get(k)));
 					break;
 				}
 			}
 		}
+		
 		return result;
 	}
 
