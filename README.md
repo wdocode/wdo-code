@@ -5,7 +5,7 @@
 
 - wdo-code是Java语言实现的快速开发工具。可支持基于框架（springMVC/STRTUS/mybatis/hibernate）生成基础代码。
 - 使用Maven对项目进行模块化管理，提高项目的易开发性、扩展性。
-- 系统包括4个子系统：代码生成器wdo-codeGen、excel导出工具poi-document-extend。
+- 系统包括4个子系统：代码生成器wdo-codeGen、excel导出工具poi-document-extend、mybatis UUID主键生成扩展工具。
 
 
 ## poi-document-extend主要功能
