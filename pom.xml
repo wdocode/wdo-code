@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.wdocode</groupId>
+	<artifactId>wdocode</artifactId>
+	<version>1.0</version>
+	<name>wdo-code</name>
+	<description>wdo-code是Java语言实现的快速开发工具。可支持基于框架（springMVC/STRTUS/mybatis/hibernate）生成基础代码。</description>
+	<packaging>pom</packaging>
+	<properties>
+	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+	<dependencies>
+
+	</dependencies>
+	<modules>
+		<module>poi-document-extend</module>
+		<module>mybatis-uuidkeyGenerator</module>
+		<module>mybatis-uuidkeyGenerator-spring-boot</module>
+	</modules>
+
+</project>
